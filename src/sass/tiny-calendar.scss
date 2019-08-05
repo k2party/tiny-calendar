@@ -1,0 +1,32 @@
+table.tc-table {
+	width: 100%;
+	border: none;
+	border-collapse: separate;
+	border-spacing: 1px 1px;
+
+	& > thead {
+		background-color: #ada;
+	}
+	& > tbody {
+		background-color: #ddf;
+	}
+
+	.tc-date {
+		position: relative;
+	}
+	.tc-date-date {
+		position: relative;
+		text-align: center;
+	}
+	.tc-event {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		cursor: pointer;
+		background-color: red;
+		opacity: 0.2;
+	}
+}
+	
