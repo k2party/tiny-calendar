@@ -40,26 +40,42 @@ table.tc-table .tc-date-after {
 	<br/>
 	<div id="calendar"></div>
 
-	<div>
-		<label>カレンダーデモ（クラス定義のみ／bootstrapもどき）</label><br/>
-		<a href="#prev_2" role="button">&lt;&lt;</a>
-		<span id="yyyymm_2"></span>
-		<a href="#next_2" role="button">&gt;&gt;</a>
-		<input type="text" id="startDate_2" size="10">
-		<button type="button" onclick="$('#calendar_2').TinyCalendar('setStartDate', $('#startDate_2').val())">GO!</button>
-		
-		<br/>
-		<div id="calendar_2" class="TinyCalendar" style="width:300px;"
-			data-first-day="1"
-			data-min-date='2019-07-01'
-			data-max-date='2019-12-31'
-			data-events='[
-				{"date":"2019-07-01", "tooltip":"休日"},
-				{"date":"2019-07-12", "tooltip":"海の日"},
-				{"date":"2019-07-31", "tooltip":"月末"},
-				{"date":"2019-08-12", "tooltip":"山の日"}]'
-			data-rendered="$('#yyyymm_2').text($('#calendar_2').TinyCalendar('getStartDate').format('YYYY年M月'))"></div>
+	<label>カレンダーデモ（クラス定義のみ／bootstrapもどき）</label><br/>
+	<a href="#prev_2" role="button">&lt;&lt;</a>
+	<span id="yyyymm_2"></span>
+	<a href="#next_2" role="button">&gt;&gt;</a>
+	<input type="text" id="startDate_2" size="10">
+	<button type="button" onclick="$('#calendar_2').TinyCalendar('setStartDate', $('#startDate_2').val())">GO!</button>
+	
+	<br/>
+	<div id="calendar_2" class="TinyCalendar" style="width:300px;"
+		data-first-day="1"
+		data-min-date='2019-07-01'
+		data-max-date='2019-12-31'
+		data-events='[
+			{"date":"2019-07-01", "tooltip":"休日"},
+			{"date":"2019-07-12", "tooltip":"海の日"},
+			{"date":"2019-07-31", "tooltip":"月末"},
+			{"date":"2019-08-12", "tooltip":"山の日"}]'
+		data-rendered="$('#yyyymm_2').text($('#calendar_2').TinyCalendar('getStartDate').format('YYYY年M月'))">
 	</div>
+
+	<label>カレンダーデモ（クラス定義のみ／JSON使用）</label><br/>
+	<a href="#prev_3" role="button">&lt;&lt;</a>
+	<span id="yyyymm_3"></span>
+	<a href="#next_3" role="button">&gt;&gt;</a>
+	<input type="text" id="startDate_3" size="10">
+	<button type="button" onclick="$('#calendar_3').TinyCalendar('setStartDate', $('#startDate_3').val())">GO!</button>
+	
+	<br/>
+	<div id="calendar_3" class="TinyCalendar" style="width:300px;"
+		data-first-day="0"
+		data-min-date='2019-07-01'
+		data-max-date='2019-12-31'
+		data-ajax='tiny-calendar.json'
+		data-rendered="$('#yyyymm_3').text($('#calendar_3').TinyCalendar('getStartDate').format('YYYY年M月'))">
+	</div>
+
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -134,6 +150,15 @@ table.tc-table .tc-date-after {
 	});
 	$('a[href="#next_2"]').on('click', function() {
 		$('#calendar_2').TinyCalendar('next');
+		return false;
+	});
+
+	$('a[href="#prev_3"]').on('click', function() {
+		$('#calendar_3').TinyCalendar('prev');
+		return false;
+	});
+	$('a[href="#next_3"]').on('click', function() {
+		$('#calendar_3').TinyCalendar('next');
 		return false;
 	});
 

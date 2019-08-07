@@ -34,6 +34,13 @@
 				moment().startOf('year'));
 		this._options.maxDate = this._date(this._options.maxDate,
 				moment().startOf('year').add(2, 'y').subtract(1, 'd'));
+		if(typeof this._options.ajax == 'string') {
+			this._options.ajax = {url: this._options.ajax};
+		}
+		if(typeof this._options.ajax == 'object'
+			&& this._options.ajax.type == undefined) {
+			this._options.ajax.type = 'get';
+		}
 	}
 	
 	TinyCalendar.prototype = {
