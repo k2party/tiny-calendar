@@ -1,0 +1,70 @@
+<html lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<meta http-equiv="x-ua-compatible" content="IE=edge">
+<title>TinyCalendar demonstration</title>
+<link rel="stylesheet" href="resources/tiny-calendar.css">
+<style type="text/css">
+#calendar {
+	width: 200px;
+}
+#calendar td,
+#calendar th,
+#calendar .tc-event {
+	font-size: 10px;
+}
+table.tc-table .tc-sun {
+	color: red;
+}
+table.tc-table .tc-sat {
+	color: blue;
+}
+table.tc-table .tc-date-before,
+table.tc-table .tc-date-after {
+	background-color: #aaa;
+	color: #ddd;
+}
+.tc-event.notify {
+	background-color: yellow !important;
+}
+</style>
+</head>
+<body>
+<div>
+	<label>カレンダーデモ（クラス定義のみ／JSON使用）</label><br/>
+	<a href="#prev" role="button">&lt;&lt;</a>
+	<span id="yyyymm"></span>
+	<a href="#next" role="button">&gt;&gt;</a>
+	<input type="text" id="startDate" size="10">
+	<button type="button" onclick="$('#calendar').TinyCalendar('setStartDate', $('#startDate').val())">GO!</button>
+	
+	<br/>
+	<div id="calendar" class="TinyCalendar"
+		data-first-day="0"
+		data-min-date='2019-07-01'
+		data-max-date='2019-12-31'
+		data-ajax='tiny-calendar.json'
+		data-rendered="$('#yyyymm').text($('#calendar').TinyCalendar('getStartDate').format('YYYY年M月'))">
+	</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="resources/tiny-calendar.js"></script>
+<script type="text/javascript">
+(function($) {
+	$('a[href="#prev"]').on('click', function() {
+		$('#calendar').TinyCalendar('prev');
+		return false;
+	});
+	$('a[href="#next"]').on('click', function() {
+		$('#calendar').TinyCalendar('next');
+		return false;
+	});
+	$('.TinyCalendar').each(function() {
+		var $this = $(this);
+		$this.TinyCalendar($this.data());
+	});
+})(jQuery);
+</script>
+</body>
+</html>

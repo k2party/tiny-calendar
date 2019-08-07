@@ -3,170 +3,27 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8">
 <meta http-equiv="x-ua-compatible" content="IE=edge">
 <title>TinyCalendar demonstration</title>
-<link rel="stylesheet" href="resources/tiny-calendar.css">
 <style type="text/css">
-#calendar {
-	width: 200px;
-}
-#calendar td,
-#calendar th,
-#calendar .tc-event {
-	font-size: 10px;
-}
-table.tc-table .tc-sun {
-	color: red;
-}
-table.tc-table .tc-sat {
-	color: blue;
-}
-table.tc-table .tc-date-before,
-table.tc-table .tc-date-after {
-	background-color: #aaa;
-	color: #ddd;
-}
-.tc-event.notify {
-	background-color: yellow !important;
+iframe {
+	width: 450px;
+	height: 200px;
+	overflow: scroll;
 }
 </style>
 </head>
 <body>
 <div>
-	<label>カレンダーデモ（jQueryプラグインモード）</label><br/>
-		<a href="#prev" role="button">&lt;&lt;</a>
-	<span id="yyyymm"></span>
-	<a href="#next" role="button">&gt;&gt;</a>
-	<input type="text" id="startDate_1" size="10">
-	<button type="button" onclick="$('#calendar').TinyCalendar('setStartDate', $('#startDate_1').val())">GO!</button>
-	<br/>
-	<div id="calendar"></div>
-
-	<label>カレンダーデモ（クラス定義のみ／bootstrapもどき）</label><br/>
-	<a href="#prev_2" role="button">&lt;&lt;</a>
-	<span id="yyyymm_2"></span>
-	<a href="#next_2" role="button">&gt;&gt;</a>
-	<input type="text" id="startDate_2" size="10">
-	<button type="button" onclick="$('#calendar_2').TinyCalendar('setStartDate', $('#startDate_2').val())">GO!</button>
-	
-	<br/>
-	<div id="calendar_2" class="TinyCalendar" style="width:300px;"
-		data-first-day="1"
-		data-min-date='2019-07-01'
-		data-max-date='2019-12-31'
-		data-events='[
-			{"date":"2019-07-01", "tooltip":"休日"},
-			{"date":"2019-07-12", "tooltip":"海の日"},
-			{"date":"2019-07-31", "tooltip":"月末"},
-			{"date":"2019-08-12", "tooltip":"山の日"}]'
-		data-rendered="$('#yyyymm_2').text($('#calendar_2').TinyCalendar('getStartDate').format('YYYY年M月'))">
-	</div>
-
-	<label>カレンダーデモ（クラス定義のみ／JSON使用）</label><br/>
-	<a href="#prev_3" role="button">&lt;&lt;</a>
-	<span id="yyyymm_3"></span>
-	<a href="#next_3" role="button">&gt;&gt;</a>
-	<input type="text" id="startDate_3" size="10">
-	<button type="button" onclick="$('#calendar_3').TinyCalendar('setStartDate', $('#startDate_3').val())">GO!</button>
-	
-	<br/>
-	<div id="calendar_3" class="TinyCalendar" style="width:300px;"
-		data-first-day="0"
-		data-min-date='2019-07-01'
-		data-max-date='2019-12-31'
-		data-ajax='tiny-calendar.json'
-		data-rendered="$('#yyyymm_3').text($('#calendar_3').TinyCalendar('getStartDate').format('YYYY年M月'))">
-	</div>
-
+	<ul>
+		<li>jQueryプラグインモード<br/>
+			<iframe src="tiny-calendar_01.html"></iframe>
+		</li>
+		<li>クラス定義のみ／bootstrapもどき<br/>
+			<iframe src="tiny-calendar_02.html"></iframe>
+		</li>
+		<li>クラス定義のみ／JSON使用<br/>
+			<iframe src="tiny-calendar_02.html"></iframe>
+		</li>
+	</ul>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="resources/tiny-calendar.js"></script>
-<script type="text/javascript">
-(function($) {
-	$('#calendar').TinyCalendar({
-		firstDay: 1,
-		rows: 6,
-		range: 'view',
-		before: 'hidden',
-		after: 'hidden',
-		events: [
-			{date:'2019-07-01', tooltip:'休日'},
-			{date:'2019-07-12', tooltip:'海の日'},
-			{date:'2019-07-31', tooltip:'月末'},
-			{date:'2019-08-12', tooltip:'山の日'},
-		],
-		rendered: function() {
-			console.log('rendered', [moment().format(), this]);
-			var startDate = this.TinyCalendar('getStartDate');
-			$('#yyyymm').text(startDate.format('YYYY年M月'));
-		},
-		eventClick: function(jsEvent, event, $observer)
-		{
-			console.log('eventClick', [moment().format(), this, jsEvent, event, $observer]);
-			return false;
-		},
-		eventMouseenter: function(jsEvent, event, $observer)
-		{
-			console.log('eventMouseenter', [moment().format(), this, jsEvent, event, $observer]);
-			return false;
-		},
-		eventMouseleave: function(jsEvent, event, $observer)
-		{
-			console.log('eventMouseleave', [moment().format(), this, jsEvent, event, $observer]);
-			return false;
-		},
-		eventRender: function(event, $event)
-		{
-			console.log('eventRender', [moment().format(), this, event, $event]);
-			return $event;
-		},
-		dayClick: function(jsEvent, date, $observer)
-		{
-			console.log('dayClick', [moment().format(), this, jsEvent, date.format('YYYY-MM-DD'), $observer]);
-			return false;
-		},
-		mouseenter: function(jsEvent, date, $observer)
-		{
-			console.log('mouseenter', [moment().format(), this, jsEvent, date.format('YYYY-MM-DD'), $observer]);
-			return false;
-		},
-		mouseleave: function(jsEvent, date, $observer)
-		{
-			console.log('mouseleave', [moment().format(), this, jsEvent, date.format('YYYY-MM-DD'), $observer]);
-			return false;
-		}
-	});
-	$('a[href="#prev"]').on('click', function() {
-		$('#calendar').TinyCalendar('prev');
-		return false;
-	});
-	$('a[href="#next"]').on('click', function() {
-		$('#calendar').TinyCalendar('next');
-		return false;
-	});
-	
-	$('a[href="#prev_2"]').on('click', function() {
-		$('#calendar_2').TinyCalendar('prev');
-		return false;
-	});
-	$('a[href="#next_2"]').on('click', function() {
-		$('#calendar_2').TinyCalendar('next');
-		return false;
-	});
-
-	$('a[href="#prev_3"]').on('click', function() {
-		$('#calendar_3').TinyCalendar('prev');
-		return false;
-	});
-	$('a[href="#next_3"]').on('click', function() {
-		$('#calendar_3').TinyCalendar('next');
-		return false;
-	});
-
-	$('.TinyCalendar').each(function() {
-		var $this = $(this);
-		$this.TinyCalendar($this.data());
-	});
-})(jQuery);
-</script>
 </body>
 </html>
