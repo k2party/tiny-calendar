@@ -1,6 +1,6 @@
 /**
- * tiny-calendar.js Tiny calendar view.
- * Copyright (c) 2019 Hasegawa "hasegaki" Akira.
+ * tiny-calendar.js
+ * Copyright (c) 2019 KOMEKOME Party (k2party)
  */
 ;(function($) {
 	var TinyCalendar = function($target, options)
@@ -302,8 +302,8 @@
 			.done(function (response) {
 				_this.events(response.data);
 			})
-			.fail(function (error) {
-				console.error('TinyCalendar: caught server error response', error);
+			.fail(function (e) {
+				throw new Error('TinyCalendar: caught server error response', e);
 			});
 		},
 		
@@ -323,7 +323,7 @@
 				return Function(_rendered)();
 			}
 			catch(e) {
-				console.error('TinyCalendar: `rendered` caught exception', e);
+				throw new Error('TinyCalendar: `rendered` caught exception', e);
 			}
 		},
 		
@@ -348,7 +348,7 @@
 				this._drawEvents(events);
 			}
 			catch(e) {
-				console.error('TinyCalendar: `events` caught exception', e);
+				throw new Error('TinyCalendar: `events` caught exception', e);
 			}
 		},
 		
@@ -463,7 +463,7 @@
 	};
 	
 	jQuery.fn.TinyCalendar = function() {
-		var args = Array.prototype['slice'].call(arguments);
+		var args = Array.prototype.slice.call(arguments);
 		if(args.length == 0 || typeof args[0] == 'object') {
 			this.each(function(index, target) {
 				target._tiny_calendar = new TinyCalendar($(target), args[0]);
@@ -490,6 +490,6 @@
 			return (results.length > 1)? results:results[0];
 		}
 	
-		console.error('TinyCalendar: command "{cmd}" does not exist.'.replace('{cmd}', cmd));
+		throw new Error('TinyCalendar: command "{cmd}" does not exist.'.replace('{cmd}', cmd));
 	};
 })(jQuery);
