@@ -410,7 +410,8 @@
 		_drawEvents: function(events)
 		{
 			var $tbody = this._$target.find('tbody');
-			for(var event of events) {
+			for(var index in events) {
+				var event = events[index];
 				if(this._options.before == 'hidden'
 					&& event.date.isBefore(this._options.startDate)) {
 					continue;
